@@ -1,0 +1,23 @@
+li {
+  list-style: none;
+  margin: 5px;
+  border: 1px dotted;
+}
+li span {
+  border-right: 1px solid;
+  padding: 3px;
+  display: inline-block;
+}
+.date {
+  width: 6%;
+  font-weight: bold;
+}
+.input {
+  width: 5%;
+}
+.currency {
+  width: 4%;
+}
+.output {
+  width: 13%;
+}

@@ -7,13 +7,33 @@ var configs = {
     currency: "AUD", dateFormat: "DD/MM/YYYY"
   }
 }
+var rowTemplate = function(data) {
+  return '<li> \
+  <span class="date">&date</span> \
+  <span class="input">&input</span> \
+  <span class="currency">&currency</span> \
+  <span class="output">&output</span> \
+  <span class="outputCurrency">EUR</span> \
+  </li>'
+    .replace("&date", data.date)
+    .replace("&input", data.input)
+    .replace("&currency", data.currency)
+    .replace("&output", data.output)
+      // var output = inputCurrencyData.date + ":" + inputCurrencyData.amount + " " + config.currency + " = " + conversion + " EUR";
+}
 var converter = function converter(convertMe, config) {
   fx.base = "EUR";
-  convertMe.map(function (inputCurrencyData) {
+  return convertMe.map(function (inputCurrencyData) {
     getRates(inputCurrencyData, function (data) {
       fx.rates = data.rates;
       var conversion = fx(inputCurrencyData.amount).from(config.currency).to("EUR");
-      console.log(inputCurrencyData.date + ":" + inputCurrencyData.amount + " " + config.currency + " = " + conversion + " EUR");
+      var output = inputCurrencyData.date + ":" + inputCurrencyData.amount + " " + config.currency + " = " + conversion + " EUR";
+      $("#results").append(rowTemplate({
+        date: inputCurrencyData.date, 
+        input: inputCurrencyData.amount,
+        currency: config.currency,
+        output: conversion
+      }))
     })
   })
 
