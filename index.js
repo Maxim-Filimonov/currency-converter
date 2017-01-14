@@ -67,6 +67,8 @@ var parseFile = function parseFile(config, callback) {
 };
 $("form").submit(function (event) {
   event.preventDefault();
+  // clear results
+  $("#results").html("");
   var input = $("#inputFile")[0];
   var configInput = $("#configPref").val();
   var config = configs[configInput];
